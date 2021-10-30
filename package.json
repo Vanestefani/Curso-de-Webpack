@@ -30,6 +30,7 @@
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.5.0",
+    "dotenv-webpack": "^7.0.3",
     "mini-css-extract-plugin": "^2.4.3",
     "stylus": "^0.55.0",
     "stylus-loader": "^6.2.0"
