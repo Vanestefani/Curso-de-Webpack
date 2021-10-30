@@ -17,7 +17,16 @@ module.exports = {
     },
     resolve: {
       // Aqui ponemos las extensiones que tendremos en nuestro proyecto para webpack los lea
-      extensions: [".js",".jsx"]
+      extensions: [".js",".jsx"],
+       //Agregamos una key alias a nuestro objeto resolve
+      //para ponerles nombres mas pequenos a las extensiones
+        //de nuestros archivos
+    alias:{
+        '@utils': path.resolve(__dirname, 'src/utils/'),
+        '@templates': path.resolve(__dirname, 'src/templates/'),
+        '@styles': path.resolve(__dirname, 'src/styles/'),
+        '@images': path.resolve(__dirname, 'src/assets/images/'),
+      },
     },
     module: {
         rules: [

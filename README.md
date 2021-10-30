@@ -263,3 +263,13 @@ optimization. minimizer - para sobreescribir la configuración por default de Te
                 new TerserPlugin()
             ],
   },
+## Webpack Alias
+
+Alias ⇒ nos permiten otorgar nombres paths específicos evitando los paths largos
+Para crear un alias debes agregar la siguiente configuración a webpack
+
+stos alias los vamos a poder utilizar dentro de nuestro proyecto para que cuando webpack lo prepare va a identificar que esta es la ruta a la que tenemos que entrar
+
+Luego agregamos estos alias en nuestras rutas en nuestro archivo de js
+import Template from '@templates/Template.js';
+import '@styles/main.css';
