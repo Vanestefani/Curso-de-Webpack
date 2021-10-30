@@ -312,3 +312,19 @@ process.env.API_APP
 
 
 recordemos que el archivo .env debe estar por fuera del src y si no funciona despues de instalar ( npm install -D dotenv-webpack) deberás eliminar la carpeta node_modules y el archivo package-lock.json
+
+## Webpack en modo desarrollo
+
+Creamos un nuevo archivo:
+webpack.config.dev.js
+Copiamos todo lo de webpack.config.js a el archivo que acabamos de crear.
+Borramos o comentamos el siguiente código, ya que no necesitamos optimizar para el modo de desarrollo (Queremos ver cuando funcionan las cosas).
+
+## Webpack en modo desarrollo
+
+Webpack ahora tiene un flag clean que permite limpiar el output directory https://webpack.js.org/guides/output-management/#cleaning-up-the-dist-folder,
+
+Actualmente tenemos el problema de tener varios archivos repetidos los cuales se fueron acumulando por compilaciones anteriores
+Para ello puedes limpiar la carpeta cada vez que hacemos un build, usando clean-webpack-plugin
+Cabe recalcar que esta característica es mucho más util para la configuración de producción
+Para instalarlo debes correr el siguiente comando:

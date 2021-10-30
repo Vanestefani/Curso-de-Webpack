@@ -2,8 +2,7 @@ const path =require ('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin')
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+
 const Dotenv = require('dotenv-webpack');
 module.exports = {
     // Entry nos permite decir el punto de entrada de nuestra aplicación
@@ -14,10 +13,12 @@ module.exports = {
       // Con path.resolve podemos decir dónde va estar la carpeta y la ubicación del mismo
       path: path.resolve(__dirname, "dist"),
       // filename le pone el nombre al archivo final
-
-      filename: '[name].[contenthash].js',
-      assetModuleFilename: 'assets/images/[hash][ext][query]'
+      filename: "main.js",
+      //limpiar dist
+      clean: true,
     },
+    //modo de desarrollo
+    mode: 'development',
     resolve: {
       // Aqui ponemos las extensiones que tendremos en nuestro proyecto para webpack los lea
       extensions: [".js",".jsx"],
@@ -64,12 +65,7 @@ module.exports = {
         ]
 
       },
-      optimization: {
-        minimize: true, minimizer: [
-            new CssMinimizerPlugin(),
-            new TerserPlugin()
-        ],
-      },
+
 plugins: [
     new HtmlWebpackPlugin({
         inject: true,
