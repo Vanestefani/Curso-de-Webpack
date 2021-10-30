@@ -1,0 +1,9 @@
+{
+   //aqui configuras los presents que te permite trabajar con javacript moderno
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ]
+  }
