@@ -137,11 +137,58 @@ post procesadores son herramientas que procesan el CSS y lo transforman en una n
 Para dar soporte a CSS en webpack debes instalar los siguientes paquetes
 Con npm
 
+enemos que usar loaders de CSS para que webpack pueda entender estos archivos y trabajar con ellos.
+
+npm i mini-css-extract-plugin css-loader -D para lograr esto.
+
+Podemos hacer que webpack tambien entienda los prepocesadores de CSS:
+
+npm install --save-dev stylus stylus-loader  por ejemplo para stylus.
+
 css-loader ⇒ Loader para reconocer CSS
 mini-css-extract-plugin ⇒ Extrae el CSS en archivos
 Para comenzar debemos agregar las configuraciones de webpack
 
 
+,
+      {
+        test: /\.css|.styl$/i,
+        use: [MiniCssExtractPlugin.loader,
+          'css-loader',
+          'stylus-loader'
+        ],
+      }
+## Copia de archivos con Webpack
 
+Si tienes la necesidad de mover un archivo o directorio a tu proyecto final podemos usar un plugin llamado “copy-webpack-plugin”
+Para instalarlo debemos ejecutar el comando
+
+npm i copy-webpack-plugin -D
+
+
+
+Resolve o Join path
+Cuando trabajamos en entorno de Node, habrán ocasiones que deberamos describir, mediante una dirección absoluta, el directorio de trabajo. En Node, tenemos una libreía nativa pathpara resolver este caso.
+
+Abrán veces que necesitmeos resolver o unir directorios de trabajos. Donde, con una simple declaración, podriamos caer en un sencillo copy & paste sin entender sus efectos (que pudiesen ser similares).
+
+Cuando deseen estructurar un directorio de trabajo a partir de una dirección absoluta, sin importar el SO, se utiliza path.resolve([...paths]) por ello, si queremos utilizar nuestro directorio de trabajo como una referencia, utilizamos __dirname y de ahí, resolverá el conjunto de paths que le anexemos:
+
+/*
+En nuestro ejemplo, resolverá nuestro path en /user/path/to/workdirectory/ + src + assets/images
+quedando algo similar a /users/path/to/js-portfolio/src/assets/images
+*/
+path.resolve(__dirname, 'src', 'assets/images')
+Se tendrá que ser cuidadoso en el proceso de construcción porque cada forma de escribir el path, generará en un path diferente:
+
+path.resolve('/foo/bar', './baz');
+// Returns: '/foo/bar/baz'
+
+path.resolve('/foo/bar', '/tmp/file/');
+// Returns: '/tmp/file'
+
+path.resolve('wwwroot', 'static_files/png/', '../gif/image.gif');
+// If the current working directory is /home/myself/node,
+// this returns '/home/myself/node/wwwroot/static_files/gif/image.gif'
 
 

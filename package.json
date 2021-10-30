@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx webpack --mode production ",
+    "build": "npx webpack --mode production --config webpack.config.js",
     "dev": "npx webpack --mode development "
   },
   "repository": {
@@ -28,9 +28,13 @@
     "@babel/plugin-transform-runtime": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
     "babel-loader": "^8.2.3",
+    "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.5.0",
-    "html-webpack-plugin": "^5.5.0",
-    "mini-css-extract-plugin": "^2.4.3"
+    "mini-css-extract-plugin": "^2.4.3",
+    "stylus": "^0.55.0",
+    "stylus-loader": "^6.2.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "html-webpack-plugin": "^5.5.0"
+  }
 }

@@ -1,5 +1,6 @@
-const path =require ('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path =require ('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
     // Entry nos permite decir el punto de entrada de nuestra aplicación
     entry: "./src/index.js",
@@ -26,6 +27,13 @@ module.exports = {
             },
             // Exclude permite omitir archivos o carpetas especificas
             exclude: /node_modules/
+          },
+          {
+            test: /\.css|.styl$/i,
+            use: [MiniCssExtractPlugin.loader,
+              'css-loader',
+              'stylus-loader'
+            ],
           }
         ]
       },
@@ -35,8 +43,9 @@ plugins: [
         inject: true,
         template: './public/index.html',
         filename: './index.html',
-        title: 'título de mi app',
-    })
+        title: 'Portafolio',
+    }),
+    new MiniCssExtractPlugin(),
 ]
 
   }
