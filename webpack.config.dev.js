@@ -17,6 +17,8 @@ module.exports = {
       //limpiar dist
       clean: true,
     },
+
+    watch: true,
     //modo de desarrollo
     mode: 'development',
     resolve: {

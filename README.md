@@ -324,7 +324,56 @@ Borramos o comentamos el siguiente código, ya que no necesitamos optimizar para
 
 Webpack ahora tiene un flag clean que permite limpiar el output directory https://webpack.js.org/guides/output-management/#cleaning-up-the-dist-folder,
 
-Actualmente tenemos el problema de tener varios archivos repetidos los cuales se fueron acumulando por compilaciones anteriores
-Para ello puedes limpiar la carpeta cada vez que hacemos un build, usando clean-webpack-plugin
-Cabe recalcar que esta característica es mucho más util para la configuración de producción
-Para instalarlo debes correr el siguiente comando:
+##  Webpack Watch
+
+El modo watch hace que nuestro proyecto se compile de forma automática
+Es decir que está atento a cambios
+Para habilitarlo debemos agregar lo siguiente en la configuración de webpack
+module.exports = {
+	...
+	watch: true
+}
+Cada vez que haya un cambio hara un build automático
+Otra manera es mandar la opción mediante parámetros de consola en package.json
+{
+	"scripts": {
+		"dev:watch": "webpack --config webpack.config.dev.js --watch"
+	}
+}
+Vale la pena recordar que si aplicamos en modo producción se tomara más tiempo porque se optimizaran los recursos
+Por ello en modo desarrollo se salta ese paso y es más rápido la compilación
+
+## Deploy a Netlify
+
+Lo primero que debemos hacer es crear una cuenta en Netlify. Lo siguiente es crear un archivo en la raíz del proyecto llamado netlify.toml el cual va a llevar la siguiente configuración:
+
+## **netlify.toml**
+[build]
+    publish = "dist" // ¿cual va a ser la carpeta a publicar?
+    command = "npm run build" // Comando a ejecutar para el deploy
+Para el siguiente paso debemos ya tener nuestro repositorio en algún servicio de la nube, como Github. Ahora, vamos a la pagina de Netlify para crear el nuevo sitio.
+
+Crear nuevo sitio → Seleccionar nube (Github) → Elegir repositorio y rama a subir → Deploy
+
+Apartir de ahora Netlify nos levanta el servidor de manera gratuita, este proceso puede ser lento ya que es un servicio gratuito. En el summary de nuestro deploy podemos ver el log del build donde podriamos ver los errores presentes.
+
+En el proyecto actual, al hacer uso de una variable de entorno, necesitamos realizar la siguiente configuración para que Netlify pueda trabajar con ella: Creamos una carpeta llamada scripts/ y adentro de esta carpeta vamos a crear un archivo llamado create-env.js. En este archivo vamos a colocar este código
+
+// **create-env.js**
+
+const fs = require('fs'); // fs = file system
+
+// fs.writeFileSync("path", `argumento a crear`);
+fs.writeFileSync("./.env", `API=${process.env.API}\n`);
+Pero ¿de dónde vamos a obtener/setear el process.env? Lo vamos a asignar en netlify, en nuestro deploy vamos a buscar la Sección de Enviroment → Enviroment Variables → Edit Variables. En nuestro caso la llamaremos API y asignaremos el valor de nuestro API: https://randomuser.me/api/
+
+Ahora, debemos ejecutar este script antes de ejecutar el comando de build, para que sea enviado a netlify. Vamos a nuestro package.json y vamos a modificar el script build de la siguiente manera:
+
+"scripts": {
+    ...
+    "build": "node ./scripts/create-env.js && webpack --config webpack.config.js",
+  }
+⚠️Cuidado al anidar la ejecución de scripts, porque si el primero en ejecutarse lo hace como demonio, puede causar un problema ya que no va a ejecutarse el segundo script.
+
+Luego de todos estos cambios debemos empujarlos a la nube ✌🏻
+

@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx webpack --mode production --config webpack.config.js",
-    "dev": "npx webpack --mode development --config webpack.config.dev.js "
+    "dev": "npx webpack --mode development --config webpack.config.dev.js ",
+    "watch": "npm run dev --watch",
+    "dev:watch": "npm run build --watch"
   },
   "repository": {
     "type": "git",
