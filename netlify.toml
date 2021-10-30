@@ -1,5 +1,4 @@
 [build]
 
   publis = "dist"
- command = "npm install && npm run build"
-  functions = "functions"
+  command = "npm run build"
