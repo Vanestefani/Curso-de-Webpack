@@ -31,6 +31,10 @@ module.exports = {
             exclude: /node_modules/
           },
           {
+            test: /\.png/,
+            type: "asset/resource"
+          },
+          {
             test: /\.css|.styl$/i,
             use: [MiniCssExtractPlugin.loader,
               'css-loader',

@@ -192,3 +192,26 @@ path.resolve('wwwroot', 'static_files/png/', '../gif/image.gif');
 // this returns '/home/myself/node/wwwroot/static_files/gif/image.gif'
 
 
+## Loaders de imágenes
+<h4>Apuntes</h4>
+Puedes usar una forma de importar las imágenes haciendo un import de las mismas y generando una variable
+No es necesario instalar ninguna dependencia, webpack ya lo tiene incluido debemos agregar la siguiente configuración
+
+module.exports = {
+	...
+  module: {
+    rules: [
+      {
+        test: /\.png/,
+        type: "asset/resource"
+      }
+    ]
+  },
+}
+
+
+Algunos Pros:
+
+Manejas el src de las imágenes de forma abstracta y más ordenada.
+
+Quizás esté faltando alguna configuración extra, pero si la generación del hash para el nombre de la imagen fuese dinámica, obligas al navegador a romper el caché de la misma. Es decir; si actualizas el icono, por mas que se llame de la misma forma en tu repo, cuando la publiques obligas al navegador a romper el caché de la imagen para mostrar la última versión que subiste.
