@@ -238,3 +238,28 @@ La implementación de fonts quedaría de la siguiente manera:
           filename: 'static/fonts/[hash][ext][query]',  // Directorio de salida
         },
       },
+## Optimización: hashes, compresión y minificación de archivos
+ ¿Por qué es importante usar Hashes en nuestros archivos?
+Los recursos que se guardan en memoria cache suceden cuando el navegador entra a un sitio por primera vez detecta los recursos y los guarda. Por ello la siguiente vez sera mucho más rápido porque estarán en memoria
+La desventaja esta cuando sacamos una nueva versión, porque tendrán un mismo nombre evitando que se descargue los nuevos cambios, por lo tanto, el usuario no recibirá los nuevos cambios
+Para que no haya conflictos con la cache una vez que tengamos nuestro proyecto en producción es importante darles un hash para cada nueva versión
+
+
+Unos de las razones por que utilizamos webpack es porque nos permite optimizar y comprimir nuestro proyecto
+Debes utilizar los siguientes paquetes
+css-minimizer-webpack-plugin ⇒ Nos ayuda a comprimir nuestros archivos finales CSS
+terser-webpack-plugin ⇒ Permite minificar de una mejor forma
+
+npm i css-minimizer-webpack-plugin
+
+Segun la documentación oficial de webpack nos comunica que actualmente terser-webpack-plugin viene incluido desde webpack 5
+
+optimization. minimizer - para sobreescribir la configuración por default de Terser y permitir el uso de varios minificadores
+
+ optimization: {
+    minimize: true,
+            minimizer: [
+                new CssMinimizerPlugin(),
+                new TerserPlugin()
+            ],
+  },
