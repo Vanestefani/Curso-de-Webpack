@@ -40,7 +40,13 @@ module.exports = {
               'css-loader',
               'stylus-loader'
             ],
-          }
+          },  {
+            test: /\.(woff|woff2)$/i,  // Tipos de fuentes a incluir
+            type: 'asset/resource',  // Tipo de módulo a usar (este mismo puede ser usado para archivos de imágenes)
+            generator: {
+              filename: 'static/fonts/[hash][ext][query]',  // Directorio de salida
+            },
+          },
         ]
       },
 

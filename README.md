@@ -215,3 +215,26 @@ Algunos Pros:
 Manejas el src de las imágenes de forma abstracta y más ordenada.
 
 Quizás esté faltando alguna configuración extra, pero si la generación del hash para el nombre de la imagen fuese dinámica, obligas al navegador a romper el caché de la misma. Es decir; si actualizas el icono, por mas que se llame de la misma forma en tu repo, cuando la publiques obligas al navegador a romper el caché de la imagen para mostrar la última versión que subiste.
+
+## Loaders de fuentes
+
+
+Cuando utilizamos fuentes externas una buena práctica es descargarlas a nuestro proyecto
+Debido a que no hara un llamado a otros sitios
+Por ello es importante usarlo dentro de webpack
+Para esta tarea instalaras y usaras “file-loader” y “url-loader”
+instalación con NPM
+
+npm install url-loader file-loader -D
+
+La instalación de file-loader, url-loader y raw-loader ya no es necesario a partir de Webpack 5 ya que usando Asset Modules podemos hacer lo mismo y de forma optimizada.
+
+La implementación de fonts quedaría de la siguiente manera:
+
+      {
+        test: /\.(woff|woff2)$/i,  // Tipos de fuentes a incluir
+        type: 'asset/resource',  // Tipo de módulo a usar (este mismo puede ser usado para archivos de imágenes)
+        generator: {
+          filename: 'static/fonts/[hash][ext][query]',  // Directorio de salida
+        },
+      },
